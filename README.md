@@ -4,7 +4,7 @@ Spring restAPI-en azterketaren berreskurapena 2023
 
 Datuak [Mockaroo](https://mockaroo.com/) bidez generatuta daude, beraz ez dira oso errealistak. API hau supermerkatu bateko produktuei buruz izango da.
 
-### [Deskargatu .json-a hemen](https://drive.filen.io/d/f42d939f-9130-4891-89a1-051160406c7c#odCxXQYyRgS2N8ZJZFtOvx0g9FvNx5AD)
+### [Deskargatu .json-a hemen (02.15)](https://drive.filen.io/d/a6a85181-e23c-4d94-b7ab-759e9181d9e0#xwneX197e7CDJAq10010UrqdeivloQeE)
 
 ---
 
