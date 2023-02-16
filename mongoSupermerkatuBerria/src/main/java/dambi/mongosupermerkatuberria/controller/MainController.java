@@ -3,10 +3,10 @@ package dambi.mongosupermerkatuberria.controller;
 import dambi.mongosupermerkatuberria.model.Product;
 import dambi.mongosupermerkatuberria.model.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Date;
 
 @RestController
 @RequestMapping(path = "/supermerkatua")
@@ -54,18 +54,26 @@ public class MainController {
         return productRepository.productInStockAndCheaperThan(price);
     }
 
-    @GetMapping(path = "/save")
+    @PostMapping(path = "/save")
     public @ResponseBody Product produktuaGorde(Product product) {
         return productRepository.save(product);
     }
 
-    @GetMapping(path = "/update")
-    public @ResponseBody Product produktuaEguneratu(Product product) {
+    @PutMapping(path = "/update")
+    public @ResponseBody Product produktuaEguneratu(@Valid int id, String productName, double price, Date deliveryDate, String origin, boolean isInStock) {
+        Product product = new Product();
+        product.set_id(id);
+        product.setProduct_name(productName);
+        product.setPrice(price);
+        product.setDelivery_date(deliveryDate);
+        product.setOrigin(origin);
+        product.set_in_stock(isInStock);
         return productRepository.update(product);
     }
 
-    @GetMapping(path = "/delete")
-    public void produktuaEzabatu(Product product) {
-        productRepository.delete(product);
+    @DeleteMapping(path = "/delete")
+    public @ResponseBody void produktuaEzabatu(int id) {
+        productRepository.delete(productRepository.productById(id));
     }
+
 }

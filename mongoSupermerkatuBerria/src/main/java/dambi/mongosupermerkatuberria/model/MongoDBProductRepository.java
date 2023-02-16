@@ -13,7 +13,8 @@ import com.mongodb.TransactionOptions;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
-import static com.mongodb.client.model.Filters.eq;
+
+import static com.mongodb.client.model.Filters.*;
 
 @Repository
 public class MongoDBProductRepository implements ProductRepository {
@@ -39,51 +40,53 @@ public class MongoDBProductRepository implements ProductRepository {
 
     @Override
     public Product productById(int id) {
-        return null;
+        return productCollection.find(eq("_id", id)).first();
     }
 
     @Override
     public List<Product> productByName(String productName) {
-        return null;
+        return productCollection.find(eq("product_name", productName)).into(new ArrayList<>());
     }
 
     @Override
     public List<Product> productByCategory(String category) {
-        return null;
+        return productCollection.find(eq("categories", category)).into(new ArrayList<>());
     }
 
     @Override
     public List<Product> productByOrigin(String origin) {
-        return null;
+        return productCollection.find(eq("origin", origin)).into(new ArrayList<>());
     }
 
     @Override
     public List<Product> productCheaperThan(double price) {
-        return null;
+        return productCollection.find(lt("price", price)).into(new ArrayList<>());
     }
 
     @Override
     public List<Product> productInStock() {
-        return null;
+        return productCollection.find(eq("is_in_stock", true)).into(new ArrayList<>());
     }
 
     @Override
     public List<Product> productInStockAndCheaperThan(double price) {
-        return null;
+        return productCollection.find(and(lt("price", price), eq("is_in_stock", true))).into(new ArrayList<>());
     }
 
     @Override
     public Product save(Product product) {
-        return null;
+        productCollection.insertOne(product);
+        return product;
     }
 
     @Override
     public Product update(Product product) {
-        return null;
+        productCollection.replaceOne(eq("_id", product.get_id()), product);
+        return product;
     }
 
     @Override
     public void delete(Product product) {
-
+        productCollection.deleteOne(eq("_id", product.get_id()));
     }
 }

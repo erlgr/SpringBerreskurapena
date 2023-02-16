@@ -1,8 +1,15 @@
 package dambi.mongosupermerkatuberria.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     private int _id;
     private String product_name;
@@ -11,10 +18,10 @@ public class Product {
     private String origin;
     private List<String> categories;
     private boolean is_in_stock;
+}
 
 
-
-
+/*
     public int getId() {
         return _id;
     }
@@ -72,3 +79,4 @@ public class Product {
         this.product_name = product_name;
     }
 }
+*/
