@@ -2,11 +2,13 @@ package dambi.mongosupermerkatuberria.controller;
 
 import dambi.mongosupermerkatuberria.model.Product;
 import dambi.mongosupermerkatuberria.model.ProductRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/supermerkatua")
@@ -55,25 +57,37 @@ public class MainController {
     }
 
     @PostMapping(path = "/save")
-    public @ResponseBody Product produktuaGorde(Product product) {
-        return productRepository.save(product);
+    public @ResponseBody Product produktuaGorde(int id, String productName, double price, Date deliveryDate, String origin, Boolean isInStock) {
+        Product product = new Product();
+        product.setId(id);
+        product.setProduct_name(productName);
+        product.setPrice(price);
+        product.setDelivery_date(deliveryDate);
+        product.setOrigin(origin);
+        product.setIs_in_stock(isInStock);
+        productRepository.save(product);
+        return product;
     }
 
     @PutMapping(path = "/update")
     public @ResponseBody Product produktuaEguneratu(@Valid int id, String productName, double price, Date deliveryDate, String origin, boolean isInStock) {
         Product product = new Product();
-        product.set_id(id);
+        product.setId(id);
         product.setProduct_name(productName);
         product.setPrice(price);
         product.setDelivery_date(deliveryDate);
         product.setOrigin(origin);
-        product.set_in_stock(isInStock);
+        product.setIs_in_stock(isInStock);
         return productRepository.update(product);
     }
 
     @DeleteMapping(path = "/delete")
     public @ResponseBody void produktuaEzabatu(int id) {
-        productRepository.delete(productRepository.productById(id));
+        try {
+            productRepository.delete(productRepository.productById(id));
+        } catch (Exception e) {
+            System.out.println("Ez da produktu hori aurkitu");
+        }
     }
 
 }

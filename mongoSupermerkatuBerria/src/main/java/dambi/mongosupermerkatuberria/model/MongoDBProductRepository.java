@@ -38,6 +38,7 @@ public class MongoDBProductRepository implements ProductRepository {
         return productCollection.find().into(new ArrayList<>());
     }
 
+
     @Override
     public Product productById(int id) {
         return productCollection.find(eq("_id", id)).first();
@@ -81,12 +82,12 @@ public class MongoDBProductRepository implements ProductRepository {
 
     @Override
     public Product update(Product product) {
-        productCollection.replaceOne(eq("_id", product.get_id()), product);
+        productCollection.replaceOne(eq("_id", product.getId()), product);
         return product;
     }
 
     @Override
     public void delete(Product product) {
-        productCollection.deleteOne(eq("_id", product.get_id()));
+        productCollection.deleteOne(eq("_id", product.getId()));
     }
 }

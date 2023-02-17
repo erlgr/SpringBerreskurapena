@@ -3,6 +3,8 @@ package dambi.mongosupermerkatuberria.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import nonapi.io.github.classgraph.json.Id;
+import org.bson.types.ObjectId;
 
 import java.util.Date;
 import java.util.List;
@@ -11,13 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    private int _id;
+    @Id
+    private int id;
+
     private String product_name;
     private double price;
     private Date delivery_date;
     private String origin;
     private List<String> categories;
-    private boolean is_in_stock;
+    private Boolean is_in_stock;
 }
 
 
