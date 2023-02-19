@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
+import com.mongodb.client.model.Filters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ import com.mongodb.TransactionOptions;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -82,7 +84,8 @@ public class MongoDBProductRepository implements ProductRepository {
 
     @Override
     public Product update(Product product) {
-        productCollection.replaceOne(eq("_id", product.getId()), product);
+        productCollection.updateOne(Filters.eq("_id", product.getId()),
+            new Document("$set", new Document("product_name", product.getProduct_name()).append("categories", null).append("delivery_date", product.getDelivery_date()).append("price", product.getPrice()).append("origin", product.getOrigin()).append("is_in_stock", product.getIs_in_stock())));
         return product;
     }
 

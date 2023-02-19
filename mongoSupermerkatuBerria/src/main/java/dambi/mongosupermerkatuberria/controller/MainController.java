@@ -70,15 +70,22 @@ public class MainController {
     }
 
     @PutMapping(path = "/update")
-    public @ResponseBody Product produktuaEguneratu(@Valid int id, String productName, double price, Date deliveryDate, String origin, boolean isInStock) {
-        Product product = new Product();
-        product.setId(id);
-        product.setProduct_name(productName);
-        product.setPrice(price);
-        product.setDelivery_date(deliveryDate);
-        product.setOrigin(origin);
-        product.setIs_in_stock(isInStock);
-        return productRepository.update(product);
+    public Product produktuaEguneratu(@Valid int id, String productName, double price, String origin, boolean isInStock) {
+        try {
+            Product product = productRepository.productById(id);
+            product.setId(id);
+            product.setProduct_name(productName);
+            product.setPrice(price);
+            product.setDelivery_date(productRepository.productById(id).getDelivery_date());
+            product.setOrigin(origin);
+            product.setIs_in_stock(isInStock);
+            product.setCategories(productRepository.productById(id).getCategories());
+            productRepository.update(product);
+            return product;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     @DeleteMapping(path = "/delete")
