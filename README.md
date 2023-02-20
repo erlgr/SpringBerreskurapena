@@ -6,6 +6,8 @@ Datuak [Mockaroo](https://mockaroo.com/) bidez generatuta daude, beraz ez dira o
 
 ### [Deskargatu .json-a hemen (02.15)](https://drive.filen.io/d/a6a85181-e23c-4d94-b7ab-759e9181d9e0#xwneX197e7CDJAq10010UrqdeivloQeE)
 
+### [Ikusi bideoa hemen](https://youtu.be/lDf8fzuL0oc)
+
 ---
 
 ## Datuak:

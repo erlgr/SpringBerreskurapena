@@ -57,12 +57,12 @@ public class MainController {
     }
 
     @PostMapping(path = "/save")
-    public @ResponseBody Product produktuaGorde(int id, String productName, double price, Date deliveryDate, String origin, Boolean isInStock) {
+    public @ResponseBody Product produktuaGorde(@Valid int id, String productName, double price, String origin, Boolean isInStock) {
         Product product = new Product();
         product.setId(id);
         product.setProduct_name(productName);
         product.setPrice(price);
-        product.setDelivery_date(deliveryDate);
+        //product.setDelivery_date(deliveryDate);
         product.setOrigin(origin);
         product.setIs_in_stock(isInStock);
         productRepository.save(product);
